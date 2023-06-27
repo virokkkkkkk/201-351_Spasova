@@ -1,8 +1,8 @@
 #include <iostream>
 #include "accountlist.h"
-#include "QDebug"
+#include "QDebug" //для вывода в консоль сообщений
 
-const std::string PIN = "1234";
+const std::string PIN = "1234"; //создаем константу типа строки для пинкода
 
 int main(int argc, char *argv[])
 {
@@ -11,15 +11,15 @@ int main(int argc, char *argv[])
     std::string pin;
     std::cin >> pin;
     if (pin != PIN) {
-        std::cout << "Incorrect PIN" << std::endl;
+        std::cout << "Incorrect PIN" << std::endl; //std::endl - перевод строки (\n)
         return 0;
     }
 
-    AccountList accountList;
+    AccountList accountList; //создание объекта класса AccountList
     accountList.loadJSON("credentials.json");
 
 
-    while (1) {
+    while (true) { //бесконечный цикл, ожидающий ввода от пользователя
         std::cout << "Enter account index: ";
         int index = 0;
         std::cin >> index;
@@ -28,11 +28,11 @@ int main(int argc, char *argv[])
             return 0;
         }
 
-        if (index > accountList.size() - 1 ) {
+        if (index > accountList.size() - 1 ) { //сравнение с макс индексом
             std::cout << "Account not found" << std::endl ;
             continue;
         }
-        qDebug() << accountList.getItem(index).password << accountList.getItem(index).username;
+        qDebug() << accountList.getItem(index).username << accountList.getItem(index).password; //вывод учетных данных
     }
 
 
